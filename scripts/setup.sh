@@ -51,7 +51,7 @@ strpos()
 
 while true
 do
-    read -ra key -p "Node seed [leave empty to generate]: "
+    read -ra key -p "Validator Node Private Key (leave empty to generate): "
     if [[ $key == '' ]]; then
         break
     fi
@@ -68,7 +68,7 @@ done
 
 while true
 do
-    read -ra key -p "Bank master key: "
+    read -ra key -p "Master's Public Key: "
     valid="$(docker run --rm crypto/core src/stellar-core --checkpub $key)"
     if [[ $valid == 1 ]]; then
         MASTER_KEY=$key
@@ -80,10 +80,10 @@ done
 
 while true
 do
-    read -ra key -p "Comission key: "
+    read -ra key -p "Fee Agent's Public Key: "
     valid="$(docker run --rm crypto/core src/stellar-core --checkpub $key)"
     if [[ $key == $MASTER_KEY ]]; then
-        echo "Error: comission key must be different from master key."
+        echo "Error: fee agent's key must be different from master key."
     elif [[ $valid == 1 ]]; then
         COMISSION_KEY=$key
         break
@@ -160,7 +160,7 @@ done
 rm -f ./.core-cfg
 echo $'\n'
 echo "**************************************************************************"
-echo "Node public key [$PUBLIC]"
+echo "Validator Node Public Key: $PUBLIC"
 echo "**************************************************************************"
 
 echo "RIAK_HOST=$RIAK_HOST" >> ./.core-cfg
