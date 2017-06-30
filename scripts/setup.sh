@@ -51,7 +51,7 @@ strpos()
 
 while true
 do
-    read -ra key -p "Validator Node Private Key (leave empty to generate): "
+    read -ra key -p "Node Seed (leave empty to generate): "
     if [[ $key == '' ]]; then
         break
     fi
