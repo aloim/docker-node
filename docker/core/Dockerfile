@@ -8,7 +8,7 @@ RUN apt-get update \
 
 WORKDIR /vhosts
 
-RUN git clone -b mirror --depth 1 https://github.com/openbankit/core.git core
+RUN git clone -b master --depth 1 https://github.com/openbankit/core.git core
 
 WORKDIR /vhosts/core
 
